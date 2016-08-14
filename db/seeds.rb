@@ -1,7 +1,10 @@
 
-# -- Artists --
+# -- Delete any existing seeded data
 
+Song.delete_all
 Artist.delete_all
+
+# -- Artists --
 
 artists = [
   [ "Gorillaz", "https://yt3.ggpht.com/-UXcxdSDLo08/AAAAAAAAAAI/AAAAAAAAAAA/FP5NbxM7TzU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"],
@@ -16,8 +19,6 @@ artists.each do |name, image_url|
 end
 
 # -- Songs --
-
-Song.delete_all
 
 artist_songs = {}
 
