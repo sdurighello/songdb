@@ -1,4 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<div class="novel-item">
+  <div class="inline cover">
+    <img class="small-cover" src="<%= @artist.image.thumbnail.url %>"/>
+  </div>
+  <div class="inline details">
+    <h3><%= link_to @artist.name, @artist %></h3>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>

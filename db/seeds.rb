@@ -7,14 +7,14 @@ Artist.delete_all
 # -- Artists --
 
 artists = [
-  [ "Gorillaz", "https://yt3.ggpht.com/-UXcxdSDLo08/AAAAAAAAAAI/AAAAAAAAAAA/FP5NbxM7TzU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg"],
-  [ "Marisa Monte", "http://dailybeautyandfashion.com/wp-content/uploads/2013/10/marisa_monte.jpg"]
+  [ "Gorillaz", "http://res.cloudinary.com/caisepolente/image/upload/v1472412291/photo_obclam.jpg"],
+  [ "Marisa Monte", "http://res.cloudinary.com/caisepolente/image/upload/v1472412291/marisa_monte_pn0dgt.jpg"]
 ]
 
-artists.each do |name, image_url|
+artists.each do |name, image|
   Artist.create(
   name: name,
-  image_url: image_url
+  image: open(image)
   )
 end
 

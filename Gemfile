@@ -50,3 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Production dependencies for DEIS
 gem 'rails_12factor', group: :production
+
+# Images
+gem 'carrierwave'
+gem 'cloudinary'

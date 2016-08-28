@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   get 'overviews/index'
 
-  resources :artists do
-    resources :songs
-  end
+  resources :artists
+  resources :songs
 
   root 'overviews#index'
 
