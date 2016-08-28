@@ -7,14 +7,14 @@ Artist.delete_all
 # -- Artists --
 
 artists = [
-  [ "Gorillaz", "http://res.cloudinary.com/caisepolente/image/upload/v1470994445/sample.jpg"],
-  [ "Marisa Monte", "http://res.cloudinary.com/caisepolente/image/upload/v1470994445/sample.jpg"]
+  [ "Gorillaz", "http://res.cloudinary.com/caisepolente/image/upload/v1472412291/photo_obclam.jpg"],
+  [ "Marisa Monte", "http://res.cloudinary.com/caisepolente/image/upload/v1472412291/marisa_monte_pn0dgt.jpg"]
 ]
 
 artists.each do |name, image|
   Artist.create(
   name: name,
-  image: image
+  image: open(image)
   )
 end
 
