@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     resources :songs
   end
 
-  root 'artists#index'
+  root 'overviews#index'
 
 end
