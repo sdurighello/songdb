@@ -2,13 +2,16 @@
 
 <h1>Artists</h1>
 
+<%= button_to "Order by name", action: "order_by_name" %>
+<%= button_to "Order by creation date", action: "order_by_created_at" %>
+
 <% @artists.each do |artist| %>
   <div class="novel-item">
     <div class="inline cover">
-      <img class="small-cover" src="<%= artist.image.thumbnail.url %>"/>
+      <img class="small-cover" src="<%= artist.image.url %>"/>
     </div>
     <div class="inline details">
       <h3><%= link_to artist.name, artist %></h3>
-    </div>  
+    </div>
   </div>
 <% end %>

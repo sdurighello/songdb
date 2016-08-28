@@ -2,12 +2,101 @@
 
 <div class="novel-item">
   <div class="inline cover">
-    <img class="small-cover" src="<%= @artist.image.thumbnail.url %>"/>
+    <img class="small-cover" src="<%= @artist.image.url %>"/>
   </div>
   <div class="inline details">
     <h3><%= link_to @artist.name, @artist %></h3>
+    <form class="remove-all">
+      <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
+      <input type="submit" value="Remove all songs">
+    </form>
+    <ul>
+      <% @artist.songs.each do |song|  %>
+        <form class="remove-song" id="<%= song.id %>">
+          <%= song.name %>
+          <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
+          <input type="number" id="song_id" name="song_id" value="<%= song.id %>" hidden>
+          <input type="submit" value="Remove">
+        </form>
+      <% end %>
+    </ul>
+    <form class="add-song">
+      <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
+      <input type="text" id="song_name" name="song_name" placeholder="enter new song name">
+      <input type="submit" value="Add song">
+    </form>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_artist_path(@artist) %> |
-<%= link_to 'Back', artists_path %>
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $(".remove-song").submit(function(event){
+      event.preventDefault();
+      var artist_id = event.target.artist_id.value
+      var song_id = event.target.song_id.value
+
+      $.ajax({
+        type: "DELETE",
+        url: "/songs/" + song_id + ".json",
+        contentType: "application/json",
+        dataType: "json"})
+
+        .done(function(data) {
+          console.log("deleted " + song_id)
+          $(".remove-song#" + song_id).remove();
+        });
+
+    })
+
+    $(".add-song").submit(function(event){
+      event.preventDefault();
+      var artist_id = event.target.artist_id.value;
+      var song_name = event.target.song_name.value;
+      var new_song = {name : song_name, artist_id : artist_id};
+
+      $.ajax({
+        type: "POST",
+        url: "/songs.json",
+        data: JSON.stringify({
+            song: new_song
+        }),
+        contentType: "application/json",
+        dataType: "json"})
+
+        .done(function(data) {
+          console.log(data);
+          // Create dom elements for new song
+        });
+
+    })
+
+    $(".remove-all").submit(function(event){
+      event.preventDefault();
+      var artist_id = event.target.artist_id.value;
+
+      $.ajax({
+        type: "POST",
+        url: "/remove_all.json",
+        data: JSON.stringify({
+            artist_id: artist_id
+        }),
+        contentType: "application/json",
+        dataType: "json"})
+
+        .done(function(data) {
+          console.log(data);
+          $(".remove-song").remove();
+        });
+
+    })
+
+
+
+
+
+
+
+
+  });
+</script>
