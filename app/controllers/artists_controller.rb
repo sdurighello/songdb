@@ -1,6 +1,18 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
 
+  def remove_all
+    artist_id = params[:artist_id].to_i
+    # artist = Artist.find(artist_id)
+    all_songs = Song.where(artist_id: artist_id)
+    all_songs.each do |song|
+      song.destroy()
+    end
+
+
+  end
+
+
   # GET /artists
   # GET /artists.json
   def index
