@@ -1,16 +1,12 @@
-describe "#liked?" do
-  let(:user) { User.create(email: "user@social.com", password: "12345678") }
-  let(:post) { Post.create(message: "Whoopie", user: user) }
-  subject { user.liked?(post) }
+require 'rails_helper'
 
-  it { is_expected.to be false }
+describe Artist do
+  describe "validations" do
+    it "is invalid without a name" do
+      recipe = Artist.new(name: "")
+      recipe.valid?
+      expect(recipe.errors).to have_key(:name)
+    end
 
-  context "when liked" do
-    before { Like.create(post: post, user: user) }
-    it { is_expected.to be true }
   end
-end
-
-def liked?(post)
-  likes.pluck(:post_id).include?(post.id)
 end
