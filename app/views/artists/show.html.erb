@@ -10,16 +10,16 @@
       <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
       <input type="submit" value="Remove all songs">
     </form>
-    <ul>
+    <div id="list">
       <% @artist.songs.each do |song|  %>
-        <form class="remove-song" id="<%= song.id %>">
-          <%= song.name %>
+        <form class="song" id="<%= song.id %>">
+          <span><%= song.name %></span>
           <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
           <input type="number" id="song_id" name="song_id" value="<%= song.id %>" hidden>
           <input type="submit" value="Remove">
         </form>
       <% end %>
-    </ul>
+    </div>
     <form class="add-song">
       <input type="number" id="artist_id" name="artist_id" value="<%= @artist.id %>" hidden>
       <input type="text" id="song_name" name="song_name" placeholder="enter new song name">
@@ -31,7 +31,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-    $(".remove-song").submit(function(event){
+    $(".song").submit(function(event){
       event.preventDefault();
       var artist_id = event.target.artist_id.value
       var song_id = event.target.song_id.value
@@ -44,7 +44,7 @@
 
         .done(function(data) {
           console.log("deleted " + song_id)
-          $(".remove-song#" + song_id).remove();
+          $(".song#" + song_id).remove();
         });
 
     })
@@ -66,7 +66,32 @@
 
         .done(function(data) {
           console.log(data);
+          // Clear input name field
+          $('#song_name').val('')
           // Create dom elements for new song
+          var $form = $("<form></form>");
+
+          var $span = $("<span></span>");
+          $span.html(data.name);
+
+          var $inputArtist = $('<input hidden type="number" >')
+          $inputArtist.attr('id', artist_id);
+          $inputArtist.attr('name', 'artist_id');
+          $inputArtist.val(artist_id);
+
+          var $inputSong = $('<input hidden type="number" >')
+          $inputArtist.attr('id', data.id);
+          $inputArtist.attr('name', 'song_id');
+          $inputArtist.val(data.id);
+
+          var $submit = $('<input type="submit" value="Remove" >')
+
+          $form.append($span)
+          $form.append($inputArtist)
+          $form.append($inputSong)
+          $form.append($submit)
+
+          $('#list').append($form);
         });
 
     })
@@ -86,7 +111,7 @@
 
         .done(function(data) {
           console.log(data);
-          $(".remove-song").remove();
+          $(".song").remove();
         });
 
     })
