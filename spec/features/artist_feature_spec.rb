@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'Manage tasks', js: true do
-  scenario 'add a new task' do
+feature 'Manage songs for an artist', js: true do
+  scenario 'remove a song' do
     # Point your browser towards the todo path
     # visit todos_path
 
