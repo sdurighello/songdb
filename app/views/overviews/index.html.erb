@@ -2,8 +2,11 @@
 
 <h1>Artists</h1>
 
-<%= button_to "Order by name", action: "order_by_name" %>
-<%= button_to "Order by creation date", action: "order_by_created_at" %>
+<%= button_to(name = "Order by name", options = {} , html_options = {method: "get", params:{order_by: "name"}}) %>
+<%= button_to(name = "Order by creation date", options = {} , html_options = {method: "get", params:{order_by: "created_at"}}) %>
+
+<!-- <%= link_to "Sort by name", order_by: "name" %> -->
+<!-- <%= button_to "Order by creation date", action: "order_by_created_at" %> -->
 
 <% @artists.each do |artist| %>
   <div class="novel-item">
