@@ -69,7 +69,8 @@
           // Clear input name field
           $('#song_name').val('')
           // Create dom elements for new song
-          var $form = $("<form></form>");
+          var $form = $('<form class="song"></form>');
+          $form.attr('id', data.id)
 
           var $span = $("<span></span>");
           $span.html(data.name);
