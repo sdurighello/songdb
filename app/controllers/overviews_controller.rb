@@ -1,6 +1,7 @@
 class OverviewsController < ApplicationController
   def index
-    @artists = Artist.all.order(:name).reverse_order
+    order_by = params[:order_by] || nil
+    @artists = order_by.nil? ? Artist.all.order(:name).reverse_order : Artist.all.order(order_by.to_sym)
   end
   def order_by_name
     @artists = Artist.all.order(:name)
